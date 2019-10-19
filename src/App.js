@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
@@ -41,22 +41,48 @@ function App() {
         PetList
       </header>
 
-      <ul className="petList">
-        {!nameSort && pets.sort((a, b) => { console.log(a, b); return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1 }).map((pet, inx) => <li key={inx}><strong>{pet.name}</strong> is a {pet.animalType} (Age: {pet.age}) <button onClick={() => handleRemovePet(inx)}>Remove Pet</button></li>)}
-        {nameSort && pets.sort((a, b) => { console.log(a, b); return (a.name.toLowerCase() < b.name.toLowerCase()) ? 1 : -1 }).map((pet, inx) => <li key={inx}><strong>{pet.name}</strong> is a {pet.animalType} (Age: {pet.age}) <button onClick={() => handleRemovePet(inx)}>Remove Pet</button></li>)}
-      </ul>
+      <main>
+      <div className="petList">
+        <ul>
+          {!nameSort && pets.sort((a, b) => { console.log(a, b); return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1 }).map((pet, inx) => <li key={inx}><strong>{pet.name}</strong> is a {pet.animalType} (Age: {pet.age}) <button onClick={() => handleRemovePet(inx)}>Remove Pet</button></li>)}
+          {nameSort && pets.sort((a, b) => { console.log(a, b); return (a.name.toLowerCase() < b.name.toLowerCase()) ? 1 : -1 }).map((pet, inx) => <li key={inx}><strong>{pet.name}</strong> is a {pet.animalType} (Age: {pet.age}) <button onClick={() => handleRemovePet(inx)}>Remove Pet</button></li>)}
+        </ul>
+        <button className="sort" onClick={() => setNameSort(!nameSort)}>Sort by Name ({nameSort ? "Ascending" : "Decending"})</button>
+      </div>
 
-      <button onClick={() => setNameSort(!nameSort)}>Sort by Name ({nameSort ? "Ascending" : "Decending"})</button>
+      <div className="addNewPet">
 
-      <br/>
-      <br/>
+        <h2>Add a new Pet</h2>
 
-      <input type="text" placeholder="Pet Name" onChange={(e)=>setPetName(e.target.value)}/>
-      <select onChange={(e) => setAnimalType(e.target.value)}>
-        {uniqueAnimalTypes.map((animalType, inx) => { return (<option>{animalType}</option>) })}
-      </select>
-      <input type="number" placeholder="Pet age" onChange={(e)=>setPetAge(e.target.value)}/>
-      <button onClick={()=>handleAddPet()}>Add New Pet</button>
+        <div className="fieldGroup">
+          <label htmlFor="petName">
+            Name:
+          </label>
+          <input id="petName" type="text" placeholder="Cleo" onChange={(e)=>setPetName(e.target.value)}/>
+        </div>
+
+        <div className="fieldGroup">
+          <label htmlFor="petType">
+            Type:
+          </label>        
+          <select id="petType" onChange={(e) => setAnimalType(e.target.value)}>
+            {uniqueAnimalTypes.map((animalType, inx) => { return (<option>{animalType}</option>) })}
+          </select>
+        </div>
+
+        <div className="fieldGroup">
+          <label htmlFor="petAge">
+            Age:
+          </label>        
+          <input id="petAge" type="number" placeholder="6" onChange={(e)=>setPetAge(e.target.value)}/>
+        </div>
+
+        <button onClick={()=>handleAddPet()}>Add New Pet</button>
+
+      </div>
+
+      </main>
+
     </div>
   );  
 }
