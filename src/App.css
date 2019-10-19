@@ -134,12 +134,20 @@ ul li button:hover {
 
 
 
-@media (min-width: 481px) and (max-width: 767px) {
-  
-  .addNewPet { }
+@media (max-width: 1020px) {
 
-main {
-  flex-direction: column; 
-}  
+  main {
+    flex-direction: column; 
+  }  
   
+}
+
+@media (max-width: 768px) {
+
+  .petList,
+  .addNewPet {
+    max-width: 100%;
+    min-width: calc(100% - 80px);
+  }
+
 }
