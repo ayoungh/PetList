@@ -14,6 +14,18 @@ function App() {
 
   //create state with initial pet data
   const [pets, setPets] = useState(petData);
+  const [petName, setPetName] = useState("");
+  const [animalType, setAnimalType] = useState("snake");
+  const [petAge, setPetAge] = useState(0);
+
+  let uniqueAnimalTypes = [...new Set(pets.map(item => item.animalType))];
+
+  const handleAddPet = e => {
+    console.log('add new pet', petName, animalType, petAge);
+    setPets([...pets, { name: petName, animalType: animalType, age: petAge }]);
+    //update the animal types?
+    //uniqueAnimalTypes = [...new Set(pets.map(item => item.animalType))];
+  };    
 
 
   return (
@@ -23,11 +35,17 @@ function App() {
       </header>
 
       <ul className="petList">
-        {pets.map((pet, inx)=><li key={inx}>{pet.name}</li>)}
+        {pets.map((pet, inx) => <li key={inx}><strong>{pet.name}</strong> is a {pet.animalType} (Age: {pet.age})</li>)}
       </ul>
 
+      <input type="text" placeholder="Pet Name" onChange={(e)=>setPetName(e.target.value)}/>
+      <select onChange={(e) => setAnimalType(e.target.value)}>
+        {uniqueAnimalTypes.map((animalType, inx) => { return (<option>{animalType}</option>) })}
+      </select>
+      <input type="number" placeholder="Pet age" onChange={(e)=>setPetAge(e.target.value)}/>
+      <button onClick={()=>handleAddPet()}>Add New Pet</button>
     </div>
-  );
+  );  
 }
 
 export default App;
