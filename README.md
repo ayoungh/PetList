@@ -1,4 +1,26 @@
+# Pet List
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+- [x] Create an array with 5 different pets. Each pet should have a name, type of animal and age.
+
+- [x] Please display the list of animals
+
+- [x] Create UI to add and remove pets
+
+- [x] Add a button to sort the list by name alternating between ascending and descending
+
+- [x] make it a bit prettier
+
+
+----------------------------------
+
+
+
+
+
 
 ## Available Scripts
 
