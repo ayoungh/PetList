@@ -17,6 +17,7 @@ function App() {
   const [petName, setPetName] = useState("");
   const [animalType, setAnimalType] = useState("snake");
   const [petAge, setPetAge] = useState(0);
+  const [nameSort, setNameSort] = useState(false);
 
   let uniqueAnimalTypes = [...new Set(pets.map(item => item.animalType))];
 
@@ -41,8 +42,14 @@ function App() {
       </header>
 
       <ul className="petList">
-        {pets.map((pet, inx) => <li key={inx}><strong>{pet.name}</strong> is a {pet.animalType} (Age: {pet.age}) <button onClick={() => handleRemovePet(inx)}>Remove Pet</button></li>)}
+        {!nameSort && pets.sort((a, b) => { console.log(a, b); return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1 }).map((pet, inx) => <li key={inx}><strong>{pet.name}</strong> is a {pet.animalType} (Age: {pet.age}) <button onClick={() => handleRemovePet(inx)}>Remove Pet</button></li>)}
+        {nameSort && pets.sort((a, b) => { console.log(a, b); return (a.name.toLowerCase() < b.name.toLowerCase()) ? 1 : -1 }).map((pet, inx) => <li key={inx}><strong>{pet.name}</strong> is a {pet.animalType} (Age: {pet.age}) <button onClick={() => handleRemovePet(inx)}>Remove Pet</button></li>)}
       </ul>
+
+      <button onClick={() => setNameSort(!nameSort)}>Sort by Name ({nameSort ? "Ascending" : "Decending"})</button>
+
+      <br/>
+      <br/>
 
       <input type="text" placeholder="Pet Name" onChange={(e)=>setPetName(e.target.value)}/>
       <select onChange={(e) => setAnimalType(e.target.value)}>
