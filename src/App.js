@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+
+  //Initial data
+  let petData = [
+    {name: "Tony", animalType: "snake", age: 2 },
+    { name: "Tom", animalType: "cat", age: 1 },
+    { name: "Cleo", animalType: "dog", age: 3 },
+    { name: "Bella", animalType: "cat", age: 4 },
+    { name: "Bouncer", animalType: "dog", age: 5 },
+  ];
+
+  //create state with initial pet data
+  const [pets, setPets] = useState(petData);
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        PetList
       </header>
+
+      <ul className="petList">
+        {pets.map((pet, inx)=><li key={inx}>{pet.name}</li>)}
+      </ul>
+
     </div>
   );
 }
