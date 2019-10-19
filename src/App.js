@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -25,8 +25,14 @@ function App() {
     setPets([...pets, { name: petName, animalType: animalType, age: petAge }]);
     //update the animal types?
     //uniqueAnimalTypes = [...new Set(pets.map(item => item.animalType))];
-  };    
-
+  };   
+  
+  const handleRemovePet = e => {
+    console.log("remove pet: ", e)
+    let petList  = pets;
+    petList.splice(e, 1);
+    setPets([...petList]);
+  };      
 
   return (
     <div className="App">
@@ -35,7 +41,7 @@ function App() {
       </header>
 
       <ul className="petList">
-        {pets.map((pet, inx) => <li key={inx}><strong>{pet.name}</strong> is a {pet.animalType} (Age: {pet.age})</li>)}
+        {pets.map((pet, inx) => <li key={inx}><strong>{pet.name}</strong> is a {pet.animalType} (Age: {pet.age}) <button onClick={() => handleRemovePet(inx)}>Remove Pet</button></li>)}
       </ul>
 
       <input type="text" placeholder="Pet Name" onChange={(e)=>setPetName(e.target.value)}/>
